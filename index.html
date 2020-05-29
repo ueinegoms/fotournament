@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Fira+Sans:700&display=swap" rel="stylesheet">
+  <title>Fotournament 0.1</title>
+</head>
+
+<body id="body">
+  <!-- COMPUTER VERSION -->
+  <div id="background">
+    <div id="upper">
+      <div id="chave" class="animSwing">
+          <i id="keyIcon" class="material-icons">vpn_key</i>
+          <span id="key">***** *****</span>
+      </div>
+    </div>
+    <div id="bottom">
+      <div id="chave">
+          <i id="backArrow" class="material-icons clickable" onclick="changeNumberOfPlayers(-1)">keyboard_arrow_left</i>
+          <span id="number_of_players">4</span>
+          <i id="nextArrow" class="material-icons clickable" onclick="changeNumberOfPlayers(1)">keyboard_arrow_right</i>
+          <span>jogadores</span>  
+      </div>
+    </div>
+    <div id="readyArrow">
+      <i id="readyArrowFont" class="material-icons clickable" onmouseover="transition('readyArrowFont', 'moveLeft')"
+                                                              onmouseout="transition('readyArrowFont', 'moveLeft')"
+                                                              onclick="transition('readyArrowFont', 'fadeGoingRight'); generateKey()">keyboard_arrow_right</i>
+    </div>
+  </div>
+
+  <!-- SMARTPHONE VERSION -->
+
+
+
+  <!-- <h1>Fotournament 0.1</h1>
+    <h3>chave: <span id="chaveid"></span></h3> -->
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <!-- <script src="/__/firebase/7.2.1/firebase-app.js"></script> -->
+
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use -->
+  <!-- <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-database.js"></script> -->
+
+  <!-- Initialize Firebase -->
+  <!-- <script src="/__/firebase/init.js"></script>
+
+    <script src="app.js"></script>
+
+    <button type="button" onclick="irparacelular()"> Celular </button> -->
+
+
+  <script>
+    // VARIÁVEIS IMPORTANTES
+    var keyDB = '';
+
+    // variáveis
+    const primaryColors = [
+      '#5effdc',
+      '#83e856',
+      '#ffe66b',
+      '#ffc4dc',
+    ];
+    const substantivos = [
+      'vinho',
+      'pregos',
+      'apartamento',
+      'ripa',
+      'crânio',
+      'exibicionismo',
+      'sete',
+      'pena',
+      'parasita',
+      'flauta',
+      'neon',
+      'ulçera',
+      'automóvel',
+      'broto',
+      'espasmo',
+      'palpite',
+      'multidão',
+      'sujeira',
+      'uísque',
+      'insulto',
+      'glande',
+      'erros',
+      'colo',
+      'órgãos',
+      'térreo',
+      'murais',
+      'promoção',
+      'barulho',
+      'séculos',
+      'razão',
+    ];
+    const adjetivos = [
+      'sórdido',
+      'vulgar',
+      'resistente',
+      'especial',
+      'infernal',
+      'voraz',
+      'imundo',
+      'mestiça',
+      'alcoolico',
+      'rude',
+      'suspenso',
+      'frenética',
+      'assustado',
+      'tarado',
+      'roxa',
+      'mongol',
+      'alternativo',
+      'abundante',
+      'mutável',
+      'furioso',
+      'fedorenta',
+      'zonzo',
+      'brilhante',
+      'gigantesco',
+      'corrosiva',
+      'insano',
+      'disforme',
+      'delirante',
+      'espesso',
+      'digno',
+    ];
+    const upperDiv = document.getElementById("upper");
+    const bottomDiv = document.getElementById("bottom");
+    const number_of_players = document.getElementById("number_of_players");
+    const key = document.getElementById("key");
+    var nroPlayers = 4;
+
+    // funções
+    rand = function (min, max) {
+      if (min == null && max == null)
+        return 0;
+
+      if (max == null) {
+        max = min;
+        min = 0;
+      }
+      return min + Math.floor(Math.random() * (max - min + 1));
+    };
+
+    // variáveis que dependem das funções
+    const fontColor = primaryColors[rand(0,primaryColors.length-1)];
+
+    // FIM DAS VARIÁVEIS E UTILITÁRIOS
+
+    // setting body font color
+    document.getElementById('body').style.color = fontColor;
+
+    // setting upper color randomly
+    upperDiv.style.backgroundColor = fontColor; 
+
+    // setting number of players to show on screen
+    number_of_players.innerHTML = nroPlayers;
+
+    function changeNumberOfPlayers( qnt ){
+      nroPlayers += qnt;
+      number_of_players.innerHTML = nroPlayers;
+    }
+
+    // generateKey
+    function generateKey(){
+      keyDB = substantivos[rand(0, substantivos.length-1)] + ' ' + adjetivos[rand(0, adjetivos.length-1)]
+      key.innerHTML = keyDB;
+
+      expandsandcollapses('upper', 'bottom');
+    }
+
+    // when mouse over the next icon
+    function transition(id, cssclass){
+      var doc = document.getElementById(id);
+      if(doc.classList.contains(cssclass)){
+        doc.classList.remove(cssclass);
+      } else {
+        doc.classList.add(cssclass);
+      }
+    }
+
+    // expands and collapses
+    function expandsandcollapses(expand, collapse){
+      document.getElementById(expand).style.height = '100vh';
+      document.getElementById(collapse).style.height = '0px';
+    }
+
+    // resets upper and bottom sizes
+    function resetupperbottom(){
+      upperDiv.style.height = '50vh';
+      bottomDiv.style.height = '50vh';
+    }
+
+  </script>
+</body>
+
+</html>
